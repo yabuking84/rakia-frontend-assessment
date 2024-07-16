@@ -1,5 +1,5 @@
 import { Button } from "primereact/button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MultiSelect } from "primereact/multiselect";
 import { InputText } from "primereact/inputtext";
 import { GameCategoryOptions, GameSchema, type GameType } from "@/schema/games";
@@ -20,9 +20,6 @@ export default function EditDialog({
   hide: () => void;
 }) {
   const toast = useToastContext();
-  const [categories, setCategories] = useState<{ name: string }[]>(
-    game.c.map((e) => ({ name: e }))
-  );
   const gamesActions = useActions();
   const { reset, handleSubmit, formState, register, setError, control } =
     useForm<GameType>({
@@ -84,7 +81,6 @@ export default function EditDialog({
                 value={opt.value.map((e) => ({ name: e }))}
                 onChange={(e) => {
                   const cc = e.value.map((e: { name: string }) => e.name);
-                  console.log(cc);
                   opt.onChange(cc);
                 }}
                 options={GameCategoryOptions}
