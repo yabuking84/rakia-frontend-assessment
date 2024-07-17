@@ -9,7 +9,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<State>) => {
         .addMatcher(gamesApi.endpoints.getAllGames.matchFulfilled, (state, {payload}) => {
             state.games = [...payload]
         })
-        .addDefaultCase((state, action) => {
+        .addDefaultCase((_, action) => {
             console.log('addDefaultCase', action.type)
         })
 }
