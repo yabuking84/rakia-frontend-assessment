@@ -4,7 +4,7 @@ import { z } from 'zod'
 export const GameSchema = z.object({
     id: z.number(),
     n: z.string().min(5,{
-        message:'Name needs to have more than 4 characters'
+        message:'Name needs at least 5 characters'
     }),
     c: z.string().array(),
 })
