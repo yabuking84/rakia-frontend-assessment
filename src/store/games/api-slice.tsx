@@ -1,4 +1,4 @@
-import { GamesType } from "@/schema/games";
+import { GamesSchema, GamesType } from "@/schema/games";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const gamesApi = createApi({
@@ -7,6 +7,7 @@ export const gamesApi = createApi({
   endpoints: (builder) => ({
     getAllGames: builder.query<GamesType, void>({
       query: () => "/games.json",
+      transformResponse: (response: GamesType) => GamesSchema.parse(response),
     }),
   }),
 });
