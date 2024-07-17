@@ -66,18 +66,28 @@ export default function EditDialog({
           <span className="font-bold">ID:</span> {game.id}
         </p>
         <div className="flex flex-col">
-          <p className="font-bold">NAME: </p>
-          <InputText {...register("n")} />
-          <p className="ps-4 text-destructive">{formState.errors.n?.message}</p>
+          <label htmlFor="name" className="font-bold">
+            NAME:{" "}
+          </label>
+          <InputText
+            id="name"
+            {...register("n")}
+            invalid={!!formState.errors.n?.message}
+          />
+          {formState.errors.n?.message ? (
+            <p className="py-2 text-red-500">{formState.errors.n?.message}</p>
+          ) : null}
         </div>
         <div className="flex flex-col">
-          <p className="font-bold">CATEGORIES:</p>
-
+          <label htmlFor="categories" className="font-bold">
+            CATEGORIES:{" "}
+          </label>
           <Controller
             name="c"
             control={control}
             render={({ field: { ref, ...opt } }) => (
               <MultiSelect
+                id="categories"
                 value={opt.value.map((e) => ({ name: e }))}
                 onChange={(e) => {
                   const cc = e.value.map((e: { name: string }) => e.name);
