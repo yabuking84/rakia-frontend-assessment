@@ -88,6 +88,7 @@ export default function EditDialog({
             render={({ field: { ref, ...opt } }) => (
               <MultiSelect
                 id="categories"
+                display="chip"
                 value={opt.value.map((e) => ({ name: e }))}
                 onChange={(e) => {
                   const cc = e.value.map((e: { name: string }) => e.name);
