@@ -68,7 +68,7 @@ export default function EditDialog({
         <div className="flex flex-col">
           <p className="font-bold">NAME: </p>
           <InputText {...register("n")} />
-          <p className="ps-4 text-destructive">{formState.errors.n?.message}</p>
+          <p className="py-2 text-red-500">{formState.errors.n?.message}</p>
         </div>
         <div className="flex flex-col">
           <p className="font-bold">CATEGORIES:</p>
