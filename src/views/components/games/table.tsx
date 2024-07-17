@@ -7,14 +7,34 @@ import { type GameType } from "@/schema/games";
 import { useStore } from "@/store/games/hooks";
 import { gamesApi } from "@/store/games/api-slice";
 import { Button } from "primereact/button";
+import { useEffect } from "react";
+import { useToastContext } from "@/providers/toast-provider";
 
 export default function Table() {
-  const { isLoading, refetch } = gamesApi.useGetAllGamesQuery();
+  const { isLoading, refetch, error, isError } = gamesApi.useGetAllGamesQuery();
   const gamesStore = useStore();
+  const toast = useToastContext();
 
   const refresh = () => {
     refetch();
   };
+
+  useEffect(() => {
+    if (isError) {
+      if ((error as any)?.name === "ZodError") {
+        const zodError = error as { name: string; message: string };
+        console.error('API Error: '+JSON.parse(zodError.message)[0].message)
+        // some error handling here
+      }
+
+      toast.current?.show({
+        severity: "error",
+        summary: "Error Retrieving Games",
+        detail: "Please try again later...",
+        life: 3000,
+      });
+    }
+  }, [isError]);
 
   return (
     <>
