@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { type GameType } from "@/schema/games";
+import { extraReducers } from "./middleware"
 
 interface State {
   games: GameType[];
@@ -27,6 +28,7 @@ const slice = createSlice({
       state.games = [...state.games.filter((e) => e.id !== payload)];
     },
   },
+  extraReducers
 });
 
 export { type State, slice };
